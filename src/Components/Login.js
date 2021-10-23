@@ -5,7 +5,7 @@ function Login() {
   return (
     <div
       className={
-        "min-h-screen flex items-center justify-center bg-gray-50 py-12 px-20 sm:px-6 lg:px-8"
+        "min-h-screen flex items-center justify-center bg-gray-50 py-12 sm:px-6 lg:px-8"
       }
     >
       <div className="max-w-md w-full space-y-8">
@@ -62,8 +62,8 @@ function Login() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between px-3">
-            <div className="flex items-center">
+          <div className="flex flex-col lg:flex-row lg:items-center items-start justify-between px-3">
+            <div className="flex items-center lg:mb-0 mb-3">
               <input
                 id="remember-me"
                 name="remember-me"

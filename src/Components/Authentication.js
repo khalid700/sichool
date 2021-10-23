@@ -13,7 +13,7 @@ function Authentication() {
   return (
     <div>
       <div className="min-h-screen flex">
-        <div className="w-1/3">
+        <div className="w-full md:w-full lg:w-1/3">
           <Router>
             <Switch>
               <Route path="/login">
@@ -32,7 +32,7 @@ function Authentication() {
           </Router>
         </div>
         <div
-          className="w-2/3"
+          className="w-0 md:w-0 lg:w-2/3"
           style={{
             backgroundImage:
               "url(" +

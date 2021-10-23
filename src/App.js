@@ -1,8 +1,8 @@
 import React from "react";
-import Loading from "./Components/Loading";
+import Authentication from "./Components/Authentication";
 
 function App() {
-  return <Loading />;
+  return <Authentication />;
 }
 
 export default App;
