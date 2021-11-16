@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { onSnapshot, query, collection } from "firebase/firestore";
+import { db } from "../firebase";
+import Loading from "./Loading";
 
-function CoursesList(props) {
-  const { listCourses } = props;
+function CoursesList() {
+  const [listCourses, setListCourses] = useState([]);
+  useEffect(() => {
+    const q = query(collection(db, "courses"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const courses = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+      setListCourses(courses);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <div className="antialiased text-gray-900 font-sans p-6">
       <div className="container mx-auto">
         <div className="flex flex-wrap -mx-4">
           {listCourses.length === 0 && (
-            <h2 className="mt-6 text-center text-3xl px-3 font-extrabold text-gray-900">
-              No courses found
-            </h2>
+            // <h2 className="mt-6 text-center text-3xl px-3 font-extrabold text-gray-900">
+            //   No courses found
+            // </h2>
+            <Loading />
           )}
           {listCourses &&
             listCourses.map((course) => (
-              <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+              <div
+                key={course.id}
+                className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4"
+              >
                 <a
                   href="/"
                   className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden"
@@ -65,6 +85,7 @@ function CoursesList(props) {
                     {Array.from(Array(course.difficulty), (e, i) => {
                       return (
                         <svg
+                          key={i}
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 fill-current text-yellow-500"
@@ -76,6 +97,7 @@ function CoursesList(props) {
                     {Array.from(Array(5 - course.difficulty), (e, i) => {
                       return (
                         <svg
+                          key={i}
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 fill-current text-gray-400"

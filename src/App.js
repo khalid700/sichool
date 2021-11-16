@@ -1,8 +1,12 @@
 import React from "react";
-import Authentication from "./Components/Authentication";
+import Main from "./Components/Main";
 
 function App() {
-  return <Authentication />;
+  return (
+    <div>
+      <Main />
+    </div>
+  );
 }
 
 export default App;
